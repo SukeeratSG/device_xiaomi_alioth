@@ -2,7 +2,7 @@
     {
         "remote": "github",
         "repository": "SukeeratSG/hardware_qcom-caf_sm8250_display",
-        "target_path": "hardware/qcom-caf/sm8250_display",
+        "target_path": "hardware/qcom-caf/sm8250/display",
         "branch": "havoc"
     },
     {

@@ -3,7 +3,7 @@
 # User Defined Stuff
 
 folder="/home2/spark/spark"
-rom_name="SparkOS"*.zip
+rom_name="Spark-vInferno-alioth-"*.zip
 gapps_command="WITH_GAPPS"
 with_gapps="yes"
 build_type="userdebug"
@@ -14,10 +14,9 @@ lunch="spark"
 user="sukeerat"
 tg_username="Henlo"
 
-
 # make_clean="yes"
 # make_clean="no"
-make_clean="installclean"
+# make_clean="installclean"
 
 # Rom being built
 
@@ -32,7 +31,6 @@ newpeeps="/home/sukeerat/priv.conf"
 # Folder specifity
 
 cd "$folder"
-
 echo -e "\rBuild starting thank you for waiting"
 BLINK="https://ci.goindi.org/job/$JOB_NAME/$BUILD_ID/console"
 
@@ -66,9 +64,8 @@ export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
 export HAVOC_BUILD_TYPE=Official
 export TARGET_USES_BLUR=true
-export CCACHE_DIR=/home2/spark/ccache
+export CCACHE_DIR=/home2/spark/spark/ccache
 export SPARK_BUILD_TYPE=OFFICIAL
-
 ccache -M 75G
 
 # Time to build
@@ -77,6 +74,12 @@ source build/envsetup.sh
 export WITH_GMS=true
 export SELINUX_IGNORE_NEVERALLOWS=true
 export SKIP_ABI_CHECKS=true
+export HAVOC_BUILD_TYPE=Official
+export TARGET_USES_BLUR=true
+export CCACHE_DIR=/home2/spark/spark/ccache
+export SPARK_BUILD_TYPE=OFFICIAL
+export OVERRIDE_QCOM_HARDWARE_VARIANT=sm8250
+
 
 if [ "$with_gapps" = "yes" ];
 then
