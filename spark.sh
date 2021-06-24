@@ -62,24 +62,18 @@ export TERM=xterm
 echo -e ${blu}"CCACHE is enabled for this build"${txtrst}
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-export HAVOC_BUILD_TYPE=Official
-export TARGET_USES_BLUR=true
-export CCACHE_DIR=/home2/spark/spark/ccache
-export SPARK_BUILD_TYPE=OFFICIAL
 ccache -M 75G
 
 # Time to build
 
 source build/envsetup.sh
 export WITH_GMS=true
-export SELINUX_IGNORE_NEVERALLOWS=true
 export SKIP_ABI_CHECKS=true
-export HAVOC_BUILD_TYPE=Official
 export TARGET_USES_BLUR=true
 export CCACHE_DIR=/home2/spark/spark/ccache
 export SPARK_BUILD_TYPE=OFFICIAL
 export OVERRIDE_QCOM_HARDWARE_VARIANT=sm8250
-
+export TARGET_FACE_UNLOCK_SUPPORTED=true
 
 if [ "$with_gapps" = "yes" ];
 then

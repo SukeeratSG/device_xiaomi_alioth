@@ -1,32 +1,39 @@
 [
-    {
-        "remote": "github",
-        "repository": "SukeeratSG/hardware_qcom-caf_sm8250_display",
-        "target_path": "hardware/qcom-caf/sm8250/display",
-        "branch": "havoc"
-    },
-    {
-        "remote": "github",
-        "repository": "SukeeratSG/device_xiaomi_sm8250-common",
-        "target_path": "device/xiaomi/sm8250-common",
-        "branch": "havoc"
-    },
-    {
-        "remote": "github",
-        "repository": "SukeeratSG/kernel_xiaomi_alioth",
-        "target_path": "kernel/xiaomi/alioth",
-        "branch": "havoc"
-    },
-    {
-        "remote": "github",
-        "repository": "SukeeratSG/vendor_xiaomi_sm8250-common",
-        "target_path": "vendor/xiaomi/sm8250-common",
-        "branch": "havoc"
-    },
-    {
-        "remote": "github",
-        "repository": "SukeeratSG/vendor_xiaomi_alioth",
-        "target_path": "vendor/xiaomi/alioth",
-        "branch": "havoc"
-    }
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/hardware_qcom-caf_sm8250_display",
+		"target_path": "hardware/qcom-caf/sm8250/display",
+		"branch": "havoc"
+	},
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/device_xiaomi_sm8250-common",
+		"target_path": "device/xiaomi/sm8250-common",
+		"branch": "spark"
+	},
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/kernel_xiaomi_alioth",
+		"target_path": "kernel/xiaomi/alioth",
+		"branch": "havoc"
+	},
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/vendor_xiaomi_sm8250-common",
+		"target_path": "vendor/xiaomi/sm8250-common",
+		"branch": "havoc"
+	},
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/vendor_xiaomi_alioth",
+		"target_path": "vendor/xiaomi/alioth",
+		"branch": "havoc"
+   	},
+	{
+		"remote": "github",
+		"repository": "SukeeratSG/android_vendor_qcom_opensource_vibrator",
+		"target_path": "vendor/qcom/opensource/vibrator",
+		"branch": "havoc"
+	}
 ]
+
