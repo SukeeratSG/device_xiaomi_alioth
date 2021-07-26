@@ -7,6 +7,7 @@
 BOARD_BOOT_HEADER_VERSION := 3
 
 # Inherit from sm8250-common
+
 $(call inherit-product, device/xiaomi/sm8250-common/kona.mk)
 $(call inherit-product, vendor/xiaomi/alioth/alioth-vendor.mk)
 
@@ -18,13 +19,16 @@ PRODUCT_SHIPPING_API_LEVEL := 30
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/xiaomi/alioth/audio,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # Device-specific settings
+
 PRODUCT_PACKAGES += \
     XiaomiDoze \
-    XiaomiParts
+    XiaomiParts \
+    PocketMode
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/parts/privapp-permissions-parts.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-parts.xml\
-     $(LOCAL_PATH)/doze/privapp-permissions-doze.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-doze.xml
+     $(LOCAL_PATH)/doze/privapp-permissions-doze.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-doze.xml \
+     $(LOCAL_PATH)/pocket/privapp-permissions-pocketmode.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-pocketmode.xml
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -33,11 +37,14 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/keylayout/uinput-fpc.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/uinput-fpc.idc
 
 # Overlays
+
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay 
 
 # Properties
+
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
-  
+PRODUCT_BOARD_PLATFORM := kona
+PRODUCT_USES_QCOM_HARDWARE := true

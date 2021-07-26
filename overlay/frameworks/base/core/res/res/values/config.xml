@@ -293,7 +293,6 @@
         <item>257</item>
         <item>280</item>
         <item>295</item>
-        <item>369</item>
         <item>400</item>
         <item>416.7</item>
         <item>433.3</item>
@@ -329,6 +328,7 @@
         <item>740</item>
         <item>745</item>
         <item>750</item>
+        <item>753</item>
         <item>755</item>
         <item>760</item>
         <item>765</item>
@@ -338,16 +338,16 @@
         <item>816.7</item>
         <item>833.3</item>
         <item>850</item>
-        <item>866.7</item>
-        <item>883.3</item>
-        <item>900</item>
-        <item>914.3</item>
-        <item>928.6</item>
-        <item>942.9</item>
-        <item>957.1</item>
-        <item>971.4</item>
-        <item>985.7</item>
-        <item>1000</item>
+        <item>876.7</item>
+        <item>893.3</item>
+        <item>920</item>
+        <item>950.3</item>
+        <item>990.6</item>
+        <item>1020.9</item>
+        <item>1050.1</item>
+        <item>1150.4</item>
+        <item>1200.7</item>
+        <item>1300</item>
     </array>
     
     <!-- Array of hysteresis constraint values for brightening, represented as tenths of a
@@ -464,7 +464,34 @@
     <!-- Radius of the software rounded corners at the bottom of the display in its natural
         orientation. If zero, the value of rounded_corner_radius is used. -->
     <dimen name="rounded_corner_radius_bottom">106px</dimen>
+
+    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
+        manually by the user. Off by default, since the expected haptic feedback may not be
+        available on some devices. -->
+    <bool name="config_enableHapticTextHandle">true</bool>
     
+    <!-- Whether Hearing Aid profile is supported -->
+    <bool name="config_hearing_aid_profile_supported">true</bool>
+
+    <!-- If true, the display will be shifted around in ambient mode. -->
+    <bool name="config_enableBurnInProtection">true</bool>
+
+    <!-- Specifies the maximum burn-in offset displacement from the center. If -1, no maximum value
+         will be used. -->
+    <integer name="config_burnInProtectionMaxRadius">70</integer>
+
+    <!-- Specifies the minimum burn-in offset horizontally. -->
+    <integer name="config_burnInProtectionMinHorizontalOffset">-15</integer>
+
+    <!-- Specifies the maximum burn-in offset horizontally. -->
+    <integer name="config_burnInProtectionMaxHorizontalOffset">15</integer>
+
+    <!-- Specifies the minimum burn-in offset vertically. -->
+    <integer name="config_burnInProtectionMinVerticalOffset">-40</integer>
+
+    <!-- Specifies the maximum burn-in offset vertically. -->
+    <integer name="config_burnInProtectionMaxVerticalOffset">40</integer>
+
     <!-- The default peak refresh rate for a given device. Change this value if you want to allow
          for higher refresh rates to be automatically used out of the box -->
     <integer name="config_defaultPeakRefreshRate">120</integer>
@@ -485,5 +512,6 @@
     -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
 
+    
 </resources>
 
