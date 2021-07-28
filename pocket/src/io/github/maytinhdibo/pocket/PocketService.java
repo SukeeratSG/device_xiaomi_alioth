@@ -24,6 +24,7 @@
 
 package io.github.maytinhdibo.pocket;
 
+import android.app.AlarmManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -38,9 +39,19 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
 
+import io.github.maytinhdibo.pocket.receiver.PhoneStateReceiver;
+
 public class PocketService extends Service {
     private static final String TAG = "PocketMode";
     private static final boolean DEBUG = true;
+
+    private static final int EVENT_UNLOCK = 2;
+    private static final int EVENT_TURN_ON_SCREEN = 1;
+    private static final int EVENT_TURN_OFF_SCREEN = 0;
+
+    private int lastAction = -1;
+    private static long nextAlarm = -1;
+    private boolean isSensorRunning = false;
 
     SensorManager sensorManager;
     Sensor proximitySensor;
@@ -83,10 +94,12 @@ public class PocketService extends Service {
     }
 
     private void disableSensor() {
+        if (!isSensorRunning) return;
         if (DEBUG) Log.d(TAG, "Disable proximity sensor");
         sensorManager.unregisterListener(proximitySensorEventListener, proximitySensor);
         //mark first sensor update after disable
         isFirstChange = true;
+        isSensorRunning = false;
     }
 
     private void enableSensor() {
@@ -94,18 +107,29 @@ public class PocketService extends Service {
         sensorManager.registerListener(proximitySensorEventListener,
                 proximitySensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
+        isSensorRunning = true;
     }
 
     private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                enableSensor();
+                if (lastAction != EVENT_UNLOCK) enableSensor();
+                lastAction = EVENT_TURN_ON_SCREEN;
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 disableSensor();
+
+                //save alarm after turn off screen
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                AlarmManager.AlarmClockInfo alarmClockInfo = alarmManager.getNextAlarmClock();
+                if (alarmClockInfo != null) nextAlarm = alarmClockInfo.getTriggerTime();
+                else nextAlarm = -1;
+
+                lastAction = EVENT_TURN_OFF_SCREEN;
             } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
                 //disable when unlocked
                 disableSensor();
+                lastAction = EVENT_UNLOCK;
             }
         }
     };
@@ -121,14 +145,18 @@ public class PocketService extends Service {
             //check if the sensor type is proximity sensor.
             if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                 if (event.values[0] == 0) {
-                    //stop block turn on after 15 seconds
-                    if (!(isFirstChange && (System.currentTimeMillis() - lastBlock < 15000 && lastBlock != -1))) {
-                        if (DEBUG) Log.d(TAG, "NEAR, disable sensor and turn screen off");
-                        disableSensor();
-                        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                        if (pm != null) {
-                            pm.goToSleep(SystemClock.uptimeMillis());
-                            lastBlock = System.currentTimeMillis();
+                    long timestamp = System.currentTimeMillis();
+                    if (PhoneStateReceiver.CUR_STATE == PhoneStateReceiver.IDLE
+                            && (nextAlarm == -1 || timestamp - nextAlarm > 60000)) {
+                        //stop block turn on after 15 seconds
+                        if (!(isFirstChange && (System.currentTimeMillis() - lastBlock < 15000 && lastBlock != -1))) {
+                            if (DEBUG) Log.d(TAG, "NEAR, disable sensor and turn screen off");
+                            disableSensor();
+                            PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                            if (pm != null) {
+                                pm.goToSleep(SystemClock.uptimeMillis());
+                                lastBlock = System.currentTimeMillis();
+                            }
                         }
                     }
                 } else {
