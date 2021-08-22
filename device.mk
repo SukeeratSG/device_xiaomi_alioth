@@ -12,10 +12,10 @@ $(call inherit-product, device/xiaomi/sm8250-common/kona.mk)
 $(call inherit-product, vendor/xiaomi/alioth/alioth-vendor.mk)
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
 PRODUCT_SHIPPING_API_LEVEL := 30
 
-#Audio
+# Audio
+
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/xiaomi/alioth/audio,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # Device-specific settings
@@ -31,6 +31,7 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/pocket/privapp-permissions-pocketmode.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-pocketmode.xml
 
 # Keylayout
+
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl \
      $(LOCAL_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/uinput-fpc.kl \
