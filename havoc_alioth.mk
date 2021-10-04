@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 The LineageOS Project
+# Copyright (C) 2021 The Havoc-OS
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -7,6 +7,7 @@
 # Inherit from alioth device
 
 $(call inherit-product, device/xiaomi/alioth/device.mk)
+
 
 # Inherit some common Havoc-OS stuff.
 
@@ -26,4 +27,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 TARGET_SCREEN_DENSITY := 450
 TARGET_BOOT_ANIMATION_RES := 1080
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-WITH_GMS := true
+

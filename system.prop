@@ -1,5 +1,5 @@
-#Charger
+# Charger
+
 persist.vendor.cp.taper_term_mv=7000
 persist.vendor.cp.fcc_main_ua=400000
 persist.vendor.cp.qc3p5_vfloat_offset_uv=110000
-

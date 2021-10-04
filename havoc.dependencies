@@ -1,4 +1,5 @@
-  {
+  [
+   {
     "repository": "android_device_xiaomi_alioth-common",
     "target_path": "device/xiaomi/sm8250-common",
     "branch": "eleven"
